@@ -14,18 +14,20 @@ test('check name and date of episode', async ({ page }) => {
 
 	await season.click();
 
+	expect(await season.getAttribute('aria-current')).toBe('true');
+
 	const viidesJaksoNimi = page.getByRole('link', {
 		name: '5.',
 	});
 
-	console.log(await viidesJaksoNimi.textContent());
+	console.log(await viidesJaksoNimi.innerText());
 
 	const viidesJaksoDate = page.getByLabel('CardLabels_genericLabel__eAJwW');
 
-	console.log(await viidesJaksoDate.textContent());
+	console.log(await viidesJaksoDate.innerText());
 
-	expect(await viidesJaksoNimi.textContent()).toBe('Kausi 3. 5/6');
-	expect(await viidesJaksoDate.textContent()).toBe('ti 8.3.2016');
+	expect(await viidesJaksoNimi.innerText).toBe('Kausi 3. 5/6');
+	expect(await viidesJaksoDate.innerText).toBe('ti 8.3.2016');
 });
 
 /* 	await page.screenshot({
