@@ -8,8 +8,6 @@ test('has title', async ({ page }) => {
 });
 
 test('check email validation', async ({ page }) => {
-	headless: false;
-
 	await page.goto('https://areena.yle.fi/tv');
 
 	await page
