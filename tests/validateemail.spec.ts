@@ -2,9 +2,11 @@ import { test, expect } from '@playwright/test';
 test('check email validation', async ({ page }) => {
 	await page.goto('https://areena.yle.fi/tv');
 
+	/* Was for firefox but is not working
 	page.locator('xpath=/html/body/div[1]/div/aside/div[2]/div/button[2]')
 		.click()
-		.catch((e) => console.log(e));
+		.catch((e) => console.log(e));*/
+
 	// const cookieBanner = await page.waitForSelector(
 	//  'div[class="cookie-banner"]',
 	// );
