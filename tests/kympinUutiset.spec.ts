@@ -14,5 +14,5 @@ test('kympinNews', async ({ page }) => {
 
 	expect(await page.locator('li.guide-channels__channel:nth-child(5) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(31) > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)')
         .innerText()).toContain("22.00");
-    
+        
 });
