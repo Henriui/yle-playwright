@@ -12,21 +12,29 @@ test('check email validation', async ({ page }) => {
 
 	await page.goto('https://areena.yle.fi/tv');
 
-	await page
-		.getByRole('button', {
-			name: '.yle-header-action-login .yle-header-action-ready .yle-header-tunnus-login', // 'Kirjaudu sisään'
-		})
-		.click();
+	const button = await page.$('button.yle-header-tunnus-login:has-text("Kirjaudu")');
+
+	if (button !== null) {
+		await button.click();
+	}
+
+	await page.waitForTimeout(1000);
 
 	await page.screenshot({
 		path: `example.png`,
-		fullPage: true,
 		type: 'png',
-		quality: 100,
 	});
 
-	await expect(page).toHaveTitle('Yle Tunnus | Yle.fi');
+	await expect(page).toHaveTitle('Yle Areena – Enemmän kuin ehdit katsoa ja kuunnella | TV | Areena | yle.fi');
 
+	const emailInput = await page.$('input#emailAddress.TextInputstyles__StyledTextInput-sc-1muz39w-2.bwmGhU');
+
+	await emailInput?.fill('test@test.com');
+
+	await page.screenshot({
+		path: `example2.png`,
+		type: 'png',
+	});
 	//  await page.fill('input[name="email"]', 'test');
 
 	/*   await page.getByRole('link', { name: 'Get started' }).click();
