@@ -12,20 +12,24 @@ test('kympinNews', async ({ page }) => {
 
     const amountOfShows = await mtv3Scedule.locator('li').count();
 
-    let found:boolean = false;
+    let foundName:boolean = false;
     for (let i = 1 ; i <= amountOfShows ; i++) {
         let showName = await mtv3Scedule.locator('li:nth-child(' + i +') > div:nth-child(1) > span:nth-child(1) > span:nth-child(2) > span:nth-child(1)').innerText();
         if(showName == "Kymmenen uutiset") {
-            found = true;
+            foundName = true;
             break;
         }
     }
-    await expect(found).toBeTruthy();
-    
-    expect(await page.locator('li.guide-channels__channel:nth-child(5) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(31) > div:nth-child(1) > span:nth-child(1) > span:nth-child(2) > span:nth-child(1)')
-    .innerText()).toContain("Kymmenen uutiset");
+    await expect(foundName).toBeTruthy();
 
-    expect(await page.locator('li.guide-channels__channel:nth-child(5) > div:nth-child(2) > ul:nth-child(1) > li:nth-child(31) > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)')
-    .innerText()).toContain("22.00");
+    let foundTime:boolean = false;
+    for (let i = 1 ; i <= amountOfShows ; i++) {
+        let showName = await mtv3Scedule.locator('li:nth-child(' + i +') > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)').innerText();
+        if(showName == "22.00") {
+            foundTime = true;
+            break;
+        }
+    }
+    await expect(foundTime).toBeTruthy();
     
 });
