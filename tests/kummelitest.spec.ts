@@ -5,12 +5,12 @@ test('check name and date of episode', async ({ page }) => {
 
 	await expect(page).toHaveTitle(/Kummeli/);
 
-	const jaksot = await page.getByRole('list', {
+	const jaksot = page.getByRole('list', {
 		name: 'Tuotantokaudet',
 		exact: true,
 	});
 
-	const season = await jaksot.getByRole('listitem').nth(2);
+	const season = jaksot.getByRole('listitem').nth(2);
 
 	await season.click();
 
@@ -20,14 +20,9 @@ test('check name and date of episode', async ({ page }) => {
 		name: '5.',
 	});
 
-	console.log(await viidesJaksoNimi.innerText());
-
-	const viidesJaksoDate = page.getByLabel('CardLabels_genericLabel__eAJwW');
-
-	console.log(await viidesJaksoDate.innerText());
-
-	expect(await viidesJaksoNimi.innerText).toBe('Kausi 3. 5/6');
-	expect(await viidesJaksoDate.innerText).toBe('ti 8.3.2016');
+	expect(await viidesJaksoNimi.innerText()).toContain('5. Kummeli');
+		
+	expect(page.locator('.CardLabels_genericLabel__eAJwW').innerText()).toContain('ti 8.3.2016');
 });
 
 /* 	await page.screenshot({
