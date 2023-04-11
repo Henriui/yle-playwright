@@ -24,8 +24,8 @@ test('kympinNews', async ({ page }) => {
 
     let foundTime:boolean = false;
     for (let i = 1 ; i <= amountOfShows ; i++) {
-        let showName = await mtv3Scedule.locator('li:nth-child(' + i +') > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)').innerText();
-        if(showName == "22.00") {
+        let showTime = await mtv3Scedule.locator('li:nth-child(' + i +') > div:nth-child(1) > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)').innerText();
+        if(showTime == "22.00") {
             foundTime = true;
             break;
         }
