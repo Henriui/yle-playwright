@@ -5,6 +5,7 @@ test('has title', async ({ page }) => {
 
 	// Expect a title "to contain" a substring.
 	await expect(page).toHaveTitle(/Areena/);
+
 });
 
 test('check email validation', async ({ page }) => {
@@ -31,14 +32,13 @@ test('check email validation', async ({ page }) => {
 
 	await emailInput?.fill('test@test.com');
 
+
 	await page.screenshot({
 		path: `example2.png`,
 		type: 'png',
 	});
 	//  await page.fill('input[name="email"]', 'test');
-
-	/*   await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects the URL to contain intro.
-  await expect(page).toHaveURL(/.*intro/); */
+	//   await page.getByRole('link', { name: 'Get started' }).click();
+	// Expects the URL to contain intro.
+	//  await expect(page).toHaveURL(/.*intro/);
 });
