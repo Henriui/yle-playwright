@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
-test('check email validation', async ({ page }) => {
+import AxeBuilder from '@axe-core/playwright';
+test('check email validation', async ({ page }, testInfo) => {
 	await page.goto('https://areena.yle.fi/tv');
 
 	/* Was for firefox but is not working
@@ -19,6 +20,9 @@ test('check email validation', async ({ page }) => {
 	// });
 
 	await page.getByRole('button', { name: 'Kirjaudu', exact: true }).click();
+
+	const accessibilityScanResults = await new AxeBuilder({page}).analyze();
+
 	await page
 		.frameLocator('internal:role=dialog[name="kirjaudu sisään"i] >> iframe')
 		.getByLabel('Sähköposti')
@@ -50,4 +54,9 @@ test('check email validation', async ({ page }) => {
 	});
 
 	await expect(page).toHaveScreenshot();
+
+	await testInfo.attach('accessibility-scan-results', {
+        body: JSON.stringify(accessibilityScanResults, null, 2),
+        contentType: 'application/json'
+      });
 });

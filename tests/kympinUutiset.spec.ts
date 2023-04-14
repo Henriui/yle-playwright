@@ -1,6 +1,9 @@
 import { test, expect } from '@playwright/test';
-test('kympinNews', async ({ page }) => {
+import AxeBuilder from '@axe-core/playwright';
+test('kympinNews', async ({ page }, testInfo) => {
 	await page.goto('https://areena.yle.fi/tv/opas');
+
+    const accessibilityScanResults = await new AxeBuilder({page}).analyze();
 
     // Check the checkbox
     await page.getByLabel('Näytä menneet ohjelmat').check();
@@ -33,5 +36,10 @@ test('kympinNews', async ({ page }) => {
         foundTime = true;
     }
     await expect(foundTime).toBeTruthy();
+
+    await testInfo.attach('accessibility-scan-results', {
+        body: JSON.stringify(accessibilityScanResults, null, 2),
+        contentType: 'application/json'
+      });
     
 });
