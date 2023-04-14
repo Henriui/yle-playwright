@@ -19,9 +19,10 @@ test('check email validation', async ({ page }, testInfo) => {
 	//   type: 'png',
 	// });
 
+	const accessibilityScanResultsIndex = await new AxeBuilder({page}).analyze();
+
 	await page.getByRole('button', { name: 'Kirjaudu', exact: true }).click();
 
-	const accessibilityScanResults = await new AxeBuilder({page}).analyze();
 
 	await page
 		.frameLocator('internal:role=dialog[name="kirjaudu sisään"i] >> iframe')
@@ -46,17 +47,25 @@ test('check email validation', async ({ page }, testInfo) => {
 
 	expect(errorLabel).toBeTruthy();
 
-	await page.screenshot({
-		path: `validate.png`,
-		fullPage: true,
+	const accessibilityScanResultsLogin = await new AxeBuilder({page}).analyze();
+
+	const screenshot = await page.screenshot({
+		path: `validateLogin.png`,
 		type: 'png',
 		timeout: 50000,
 	});
 
 	await expect(page).toHaveScreenshot();
 
-	await testInfo.attach('accessibility-scan-results', {
-        body: JSON.stringify(accessibilityScanResults, null, 2),
+	await testInfo.attach('accessibility-scan-results-index', {
+        body: JSON.stringify(accessibilityScanResultsIndex, null, 2),
         contentType: 'application/json'
-      });
+    });
+
+	await testInfo.attach('accessibility-scan-results-login', {
+        body: JSON.stringify(accessibilityScanResultsLogin, null, 2),
+        contentType: 'application/json'
+    });
+	
+	await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
 });

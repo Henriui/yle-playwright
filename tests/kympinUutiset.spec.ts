@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-test('kympinNews', async ({ page }, testInfo) => {
+test('kympin uutiset time check', async ({ page }, testInfo) => {
 	await page.goto('https://areena.yle.fi/tv/opas');
 
     const accessibilityScanResults = await new AxeBuilder({page}).analyze();
@@ -37,9 +37,20 @@ test('kympinNews', async ({ page }, testInfo) => {
     }
     await expect(foundTime).toBeTruthy();
 
+    const screenshot = await page.screenshot({
+		path: `validateNews.png`,
+		fullPage: true,
+		type: 'png',
+		timeout: 50000,
+	});
+
+	await expect(page).toHaveScreenshot();
+
     await testInfo.attach('accessibility-scan-results', {
         body: JSON.stringify(accessibilityScanResults, null, 2),
         contentType: 'application/json'
-      });
+    });
+    
+	await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
     
 });

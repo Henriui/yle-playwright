@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-test('check name and date of episode', async ({ page }, testInfo) => {
+test('check name and date of kummeli episode', async ({ page }, testInfo) => {
     await page.goto('https://areena.yle.fi/1-3339547');
 
     await expect(page).toHaveTitle(/Kummeli/);
@@ -26,10 +26,22 @@ test('check name and date of episode', async ({ page }, testInfo) => {
         
     expect(await page.locator('li.CardPage_listItem__JRVg1:nth-child(5) > div:nth-child(1) > div:nth-child(2) > div:nth-child(3) > div:nth-child(1) > span:nth-child(2)').innerText()).toContain('ti 8.3.2016');
 
+	const screenshot = await page.screenshot({
+		path: `validateKummeli.png`,
+		fullPage: true,
+		type: 'png',
+		timeout: 50000,
+	});
+
+	await expect(page).toHaveScreenshot();
+
 	await testInfo.attach('accessibility-scan-results', {
         body: JSON.stringify(accessibilityScanResults, null, 2),
         contentType: 'application/json'
-      });
+    });
+
+	await testInfo.attach('screenshot', { body: screenshot, contentType: 'image/png' });
+
 });
 
 /* 	await page.screenshot({
