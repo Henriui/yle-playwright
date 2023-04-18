@@ -3,6 +3,10 @@ import AxeBuilder from '@axe-core/playwright';
 test('check email validation', async ({ page }, testInfo) => {
 	await page.goto('https://areena.yle.fi/tv');
 
+	const popup = page.getByRole('button', {name:'Hyväksy kaikki'});
+	if(popup && await popup.isVisible())
+		await page.click('text=Hyväksy kaikki');
+
 	/* Was for firefox but is not working
 	page.locator('xpath=/html/body/div[1]/div/aside/div[2]/div/button[2]')
 		.click()

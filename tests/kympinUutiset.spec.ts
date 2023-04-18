@@ -3,6 +3,10 @@ import AxeBuilder from '@axe-core/playwright';
 test('kympin uutiset time check', async ({ page }, testInfo) => {
 	await page.goto('https://areena.yle.fi/tv/opas');
 
+	const popup = page.getByRole('button', {name:'Hyväksy kaikki'});
+	if(popup && await popup.isVisible())
+		await page.click('text=Hyväksy kaikki');
+
     const accessibilityScanResults = await new AxeBuilder({page}).analyze();
 
     // Check the checkbox
@@ -27,7 +31,8 @@ test('kympin uutiset time check', async ({ page }, testInfo) => {
             break;
         }
     }
-    await expect(foundName).toBeTruthy();
+    
+    expect(foundName).toBeTruthy();
 
     let foundTime:boolean = false;
     let showTime = await kympinUutiset.locator('div > span:nth-child(1) > span:nth-child(1) > time:nth-child(1)').innerText();
