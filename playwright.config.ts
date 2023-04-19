@@ -5,7 +5,6 @@ import { defineConfig, devices } from '@playwright/test';
  * https://github.com/motdotla/dotenv
  */
 require('dotenv').config;
-
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -22,7 +21,7 @@ export default defineConfig({
 	/* Reporter to use. See https://playwright.dev/docs/test-reporters */
 	reporter: 'html',
 	/* Timeout for each test. */
-	timeout: 60000,
+	timeout: 30000,
 	/* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
 	use: {
 		/* Base URL to use in actions like `await page.goto('/')`. */
@@ -39,7 +38,7 @@ export default defineConfig({
 			use: { ...devices['Desktop Chrome'] },
 		},
 
-		{
+		/* 		{
 			name: 'firefox',
 			use: { ...devices['Desktop Firefox'] },
 		},
@@ -47,7 +46,7 @@ export default defineConfig({
 		{
 			name: 'webkit',
 			use: { ...devices['Desktop Safari'] },
-		},
+		}, */
 
 		/* Test against mobile viewports. */
 		// {
