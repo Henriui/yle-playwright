@@ -49,7 +49,8 @@ test('kympin uutiset time check', async ({ page }, testInfo) => {
 		timeout: 50000,
 	});
 
-	await expect(page).toHaveScreenshot();
+    // Changes daily so can't be tested
+	//await expect(page).toHaveScreenshot();
 
     await testInfo.attach('accessibility-scan-results', {
         body: JSON.stringify(accessibilityScanResults, null, 2),
