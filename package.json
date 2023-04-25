@@ -1,23 +1,23 @@
 {
-	"name": "@playwright/test",
-	"version": "1.0.0",
-	"description": "yle playwright test",
-	"scripts": {
-		"test": "npx playwright test --config=./playwright.config.ts",
-		"test:kummeli": "npx playwright test kummeli --config=./playwright.config.ts",
-		"test:kympinUutiset": "npx playwright test kympinUutiset --config=./playwright.config.ts",
-		"test:validateemail": "npx playwright test validateemail --config=./playwright.config.ts"
-	},
-	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"@playwright/test": "^1.32.3",
-		"axe-core": "^4.6.3",
-		"playwright": "^1.32.3"
-	},
-	"dependencies": {
-		"@axe-core/playwright": "^4.6.1",
-		"dotenv": "^16.0.3"
-	}
+  "name": "@playwright/test",
+  "version": "1.0.0",
+  "description": "yle playwright test",
+  "scripts": {
+    "test": "npx playwright test --config=./playwright.config.ts",
+    "test:kummeli": "npx playwright test kummeli --config=./playwright.config.ts",
+    "test:kympinUutiset": "npx playwright test kympinUutiset --config=./playwright.config.ts",
+    "test:validateemail": "npx playwright test validateemail --config=./playwright.config.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.32.3",
+    "axe-core": "^4.6.3",
+    "playwright": "^1.32.3"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.6.1",
+    "dotenv": "^16.0.3"
+  }
 }
